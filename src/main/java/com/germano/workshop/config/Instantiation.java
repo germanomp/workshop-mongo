@@ -2,6 +2,7 @@ package com.germano.workshop.config;
 
 import com.germano.workshop.domain.Post;
 import com.germano.workshop.domain.User;
+import com.germano.workshop.dto.AuthorDTO;
 import com.germano.workshop.repository.PostRepository;
 import com.germano.workshop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,10 +35,11 @@ public class Instantiation implements CommandLineRunner {
         User alex = new User(null, "Alex Green", "alex@gmail.com");
         User bob = new User(null, "Bob Grey", "bob@gmail.com");
 
-        Post post1 = new Post(null, sdf.parse("21/08/2023"), "Partiu viagem", "Vou viajar para são paulo.", maria);
-        Post post2 = new Post(null, sdf.parse("23/08/2023"), "Bom dia", "Acordei agora.", maria);
-
         userRepository.saveAll(Arrays.asList(maria, alex, bob));
+
+        Post post1 = new Post(null, sdf.parse("21/08/2023"), "Partiu viagem", "Vou viajar para são paulo.", new AuthorDTO(maria));
+        Post post2 = new Post(null, sdf.parse("23/08/2023"), "Bom dia", "Acordei agora.", new AuthorDTO(maria));
+
         postRepository.saveAll(Arrays.asList(post1, post2));
     }
 }
